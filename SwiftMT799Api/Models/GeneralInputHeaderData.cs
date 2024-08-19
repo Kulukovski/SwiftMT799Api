@@ -9,6 +9,9 @@
         public string Priority { get; set; }
         public string Delivery { get; set; }
         public string Obsolescence { get; set; }
+
+        //this part of the model is used for when the block 2 doesnt have all of the 
+        //optional data that is usually the last few numbers/letters of the value
         public void AddData(int id, String data)
         {
             this.MessageId = id;

@@ -18,7 +18,7 @@ namespace SwiftMT799Api.Services
             using var connection = new SQLiteConnection(_connectionString);
             connection.Open();
 
-            // Create the first table if it doesn't exist
+            //Creates the first table for most of the fields in the MT799 message
             string createTableMT799Messages = @"
             CREATE TABLE IF NOT EXISTS MT799Messages (
                 Id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -38,7 +38,7 @@ namespace SwiftMT799Api.Services
                 command.ExecuteNonQuery();
             }
 
-            // Create the second table with a foreign key referencing MT799Messages
+            //this is for subfields of the first block
             string createHeaderData = @"
             CREATE TABLE IF NOT EXISTS GeneralHeaderData (
                 MessageId INTEGER,
@@ -54,7 +54,7 @@ namespace SwiftMT799Api.Services
             {
                 command.ExecuteNonQuery();
             }
-
+            // the last 2 are subfields for the 2 different types of block 2
             string createInputHeaderData = @"
             CREATE TABLE IF NOT EXISTS InputHeaderData (
                 MessageId INTEGER,
@@ -100,7 +100,7 @@ namespace SwiftMT799Api.Services
         INSERT INTO MT799Messages (Field1, Field2, Field4, Field5, Field20, Field21, Field79, FieldMAC, FieldCHK) 
         VALUES (@Field1, @Field2, @Field4, @Field5, @Field20, @Field21, @Field79, @FieldMAC, @FieldCHK)"
             ;
-
+            //this inserts the values into the database 
             using var command = new SQLiteCommand(insertQuery, connection);
             command.Parameters.AddWithValue("@Field1", message.Field1);
             command.Parameters.AddWithValue("@Field2", message.Field2);
@@ -118,12 +118,14 @@ namespace SwiftMT799Api.Services
             {
                 messageId = (long)lastIdCommand.ExecuteScalar();
             }
-
+            //the other three also are adding the subfields to their respective tables
+            //but they create a new object to input the data
+            //because some of the fields are not always present
             if (message.Field1 != null)
             {
                 GeneralHeaderData data = new GeneralHeaderData();
                 data.AddData((int)messageId, message.Field1);
-                // Insert into GeneralHeaderData
+ 
                 string insertGeneralHeaderData = @"
                     INSERT INTO GeneralHeaderData (MessageId, App, Service, LTAddress, SessionNumber, Sequence) 
                     VALUES (@MessageId, @App, @Service, @LTAddress, @SessionNumber, @Sequence);";
@@ -157,7 +159,7 @@ namespace SwiftMT799Api.Services
                 inputCommand.ExecuteNonQuery();
             }
 
-            // Insert into OutputHeaderData
+
             if (message.Field2[0] == 'O' && message.Field2.Length >= 46)
             {
                 GeneralOutputHeaderData OutputData = new GeneralOutputHeaderData();
@@ -178,6 +180,10 @@ namespace SwiftMT799Api.Services
                 outputCommand.ExecuteNonQuery();
             }
         }
+        
+        //the next few functions simply print out the database
+        //this would most likely not be part of the API if it was proper commercial use
+        //but i added it for testing/convenience sake
         public IEnumerable<MT799Message> GetAllMessages()
         {
             var messages = new List<MT799Message>();
@@ -301,6 +307,9 @@ namespace SwiftMT799Api.Services
 
             return headers;
         }
+
+        //there is also a clear table function incase I would like to use it at some point
+        //or add it to the web API(again for testing)
         public void ClearTable()
         {
             using var connection = new SQLiteConnection(_connectionString);

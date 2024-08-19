@@ -19,6 +19,7 @@ namespace SwiftMT799Api.Controllers
         [HttpPost]
         public IActionResult UploadMT799(IFormFile file = null, string messageString = null)
         {
+            // this can take either a file upload or a direct string input
             if (file != null && file.Length > 0)
             {
                 // Handle file input

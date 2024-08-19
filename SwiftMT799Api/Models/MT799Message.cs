@@ -26,7 +26,7 @@
             { "MAC", (msg, value) => msg.FieldMAC = value },
             { "CHK", (msg, value) => msg.FieldCHK = value }
         };
-
+        //this part of the model is necessary for inputting into the database when not all fields are present
         public void UpdateFields(Dictionary<string, string> fields)
         {
 

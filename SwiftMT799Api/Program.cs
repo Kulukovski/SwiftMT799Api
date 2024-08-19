@@ -5,7 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSingleton(new SQLiteHelper("Data Source=MT799.db"));
 builder.Services.AddSingleton<MT799Parser>();
-
+// building the controllers using swagger
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
