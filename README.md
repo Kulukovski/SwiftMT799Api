@@ -16,7 +16,6 @@ The API provides several endpoints to retrieve stored messages and their headers
   - `GeneralHeaderData`: Represents block 1 header data for the MT799 message.
   - `GeneralInputHeaderData`: Represents block 2 input header data for the MT799 message.
   - `GeneralOutputHeaderData`: Represents block 2 output header data for the MT799 message.
-  - Additional models for storing message header data.
 
 ## Features
 
