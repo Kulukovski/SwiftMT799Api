@@ -8,7 +8,11 @@
         public string LTAddress { get; set; }
         public string SessionNumber { get; set; }
         public string Sequence { get; set; }
-
+        /// <summary>
+        /// takes as input the id key as well as the field1 value to parse it
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="data"></param>
         public void AddData(int id, String data)
         {
             this.MessageId = id;

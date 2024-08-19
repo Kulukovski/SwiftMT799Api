@@ -10,7 +10,11 @@
         public string OutputDate { get; set; }
         public string OutputTime { get; set; }
         public string Priority { get; set; }
-
+        /// <summary>
+        /// takes as input the id key as well as the field2 value to parse it
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="data"></param>
         public void AddData(int id, String data)
         {
             this.MessageId = id;

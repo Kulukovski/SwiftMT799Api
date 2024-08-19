@@ -5,6 +5,11 @@ namespace SwiftMT799Api.Services
 {
     public class MT799Parser
     {
+        /// <summary>
+        /// parses the file content and returns a MT799 message object
+        /// </summary>
+        /// <param name="fileContent"></param>
+        /// <returns>MT799 message object</returns>
         public MT799Message Parse(string fileContent)
         {
             //this takes the input and parses it into the different fields
@@ -20,6 +25,11 @@ namespace SwiftMT799Api.Services
         //this algorithm splits the text into the various blocks(1,2,4,5) used in MT799
         //after which it takes the 4 and 5 blocks and subdivides them again into smaller fields
         //such as 20, 21, MAC etc
+        /// <summary>
+        /// parses through the MT799 message for the fields
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns>dictionary with all the possible fields</returns>
         static Dictionary<string, string> ParseBlocks(string input)
         {
             List<string> blocks = new List<string>();
@@ -67,6 +77,11 @@ namespace SwiftMT799Api.Services
         //this is the function that subdivides
         //it works by scanning the string with a field such as 20 for example and seeing where it begins and ends
         // after it finds its range it adds it back to a dictionary with all of the fields.
+        /// <summary>
+        /// it parses the subfields of block 4 and 5 for additional information
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns>dictionary of subfields</returns>
         static Dictionary<string, string> ExtractFields(string input)
         {
             Dictionary<string, string> fields = new Dictionary<string, string>();

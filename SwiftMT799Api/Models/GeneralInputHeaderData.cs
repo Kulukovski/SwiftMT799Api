@@ -12,6 +12,11 @@
 
         //this part of the model is used for when the block 2 doesnt have all of the 
         //optional data that is usually the last few numbers/letters of the value
+        /// <summary>
+        /// takes as input the id key as well as the field2 value to parse it
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="data"></param>
         public void AddData(int id, String data)
         {
             this.MessageId = id;

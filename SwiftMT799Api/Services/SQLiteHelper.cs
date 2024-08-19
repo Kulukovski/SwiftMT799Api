@@ -91,6 +91,7 @@ namespace SwiftMT799Api.Services
             }
 
         }
+
         public void InsertMessage(MT799Message message)
         {
             using var connection = new SQLiteConnection(_connectionString);

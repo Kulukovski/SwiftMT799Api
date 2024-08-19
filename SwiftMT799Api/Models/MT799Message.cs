@@ -27,6 +27,10 @@
             { "CHK", (msg, value) => msg.FieldCHK = value }
         };
         //this part of the model is necessary for inputting into the database when not all fields are present
+        /// <summary>
+        /// takes the parsed input as a dictionary and sets the values within the object in order to deal with null fields
+        /// </summary>
+        /// <param name="fields"></param>
         public void UpdateFields(Dictionary<string, string> fields)
         {
 
