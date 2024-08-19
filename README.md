@@ -36,5 +36,5 @@ The API provides several endpoints to retrieve stored messages and their headers
 
 ## Documentation and Testing
 This API is documented using XML comments within the codebase.
-The program can be testing using Swagger for a user-friendly interface for testing and exploring the API
+The program can be tested using Swagger for a user-friendly interface for testing and exploring the API
 
